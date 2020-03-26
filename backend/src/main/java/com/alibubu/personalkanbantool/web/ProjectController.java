@@ -28,10 +28,10 @@ public class ProjectController {
     public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult bindingResult){
         ResponseEntity<?> errorMap = mapValidationErrorService.retrieveErrorMap(bindingResult);
         if (errorMap != null)
-            return errorMap;
+            return errorMap;     //the typo-error which is not associated with the database can be handled from the Controller level.
 
         Project createdProject = projectService.saveOrUpdateProject(project);
-        return new ResponseEntity<>(project, HttpStatus.CREATED);
+        return new ResponseEntity<>(createdProject, HttpStatus.CREATED);
     }
 
 

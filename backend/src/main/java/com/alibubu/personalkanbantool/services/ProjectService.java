@@ -18,6 +18,8 @@ public class ProjectService {
             return projectRepository.save(project);
         }
         catch (Exception e){
+
+            //duplicate identifier is related to the database, so we has to do it from a service level
             throw new ProjectIdException("Project ID " + project.getProjectIdentifier().toUpperCase() + " already exists!");
         }
     }
