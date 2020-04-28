@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -31,8 +28,13 @@ public class ProjectController {
             return errorMap;     //the typo-error which is not associated with the database can be handled from the Controller level.
 
         Project createdProject = projectService.saveOrUpdateProject(project);
-        return new ResponseEntity<>(createdProject, HttpStatus.CREATED);
+        return new ResponseEntity<Project>(createdProject, HttpStatus.CREATED);
     }
 
+    @GetMapping("/{projectId}")
+    public ResponseEntity<?> getProjectByIdentifier(@PathVariable String projectId){
+        Project project = projectService.findProjectByIdentifier(projectId);
 
+        return new ResponseEntity<>(project, HttpStatus.OK);
+    }
 }

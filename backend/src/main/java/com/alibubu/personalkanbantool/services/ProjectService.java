@@ -24,7 +24,15 @@ public class ProjectService {
         }
     }
 
-    public Project findByProjectIdentifier(String projectIdentifier){
-        return projectRepository.findByProjectIdentifier(projectIdentifier);
+    public Project findProjectByIdentifier(String projectIdentifier){
+        Project project = projectRepository.findByProjectIdentifier(projectIdentifier.toUpperCase());
+
+        if(project == null){
+            throw new ProjectIdException("Project ID '"+projectIdentifier+"' does not exist");
+
+        }
+
+
+        return project;
     }
 }
