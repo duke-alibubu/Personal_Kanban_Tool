@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import ProjectItem from './project/ProjectItem'
-import Header from './layout/Header'
 
 export default class Dashboard extends Component {
     render() {
         return (
             <div>
-                <Header />
+
                 <div className="projects">
                     <div className="container">
                         <div className="row">
