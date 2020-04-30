@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
+import ProjectItem from './project/ProjectItem'
 
 export default class Dashboard extends Component {
     render() {
         return (
-            <h1>
-                Con cac
-            </h1>
+            <div>
+                <h1>
+                    Welcome to the Dashboard!
+                </h1>
+                <ProjectItem />
+            </div>
         )
     }
 }
