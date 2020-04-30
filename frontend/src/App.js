@@ -4,13 +4,15 @@ import Dashboard from './components/Dashboard';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/layout/Header';
+import AddProject from './components/project/AddProject';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Header />
-        <Dashboard />
+        <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/addProject" component={AddProject} />
       </div>
     </Router>
 
