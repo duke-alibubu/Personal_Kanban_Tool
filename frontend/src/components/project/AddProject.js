@@ -11,14 +11,14 @@ class AddProject extends Component {
                             <hr />
                             <form>
                                 <div className="form-group">
-                                    <input type="text" className="form-control form-control-lg " placeholder="Project Name" />
+                                    <input type="text" className="form-control form-control-lg " placeholder="Project Name" name="projectName" />
                                 </div>
                                 <div className="form-group">
-                                    <input type="text" className="form-control form-control-lg" placeholder="Unique Project ID" />
+                                    <input type="text" className="form-control form-control-lg" placeholder="Unique Project ID" name="projectIdentifier" />
                                 </div>
 
                                 <div className="form-group">
-                                    <textarea className="form-control form-control-lg" placeholder="Project Description"></textarea>
+                                    <textarea className="form-control form-control-lg" placeholder="Project Description" name="description"></textarea>
                                 </div>
                                 <h6>Start Date</h6>
                                 <div className="form-group">
