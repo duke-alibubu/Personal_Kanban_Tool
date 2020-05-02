@@ -78,4 +78,7 @@ AddProject.propTypes = {
     createProject: PropTypes.func.isRequired
 };
 
-export default connect(null)(AddProject);
+export default connect(
+    null,
+    { createProject }
+)(AddProject);
