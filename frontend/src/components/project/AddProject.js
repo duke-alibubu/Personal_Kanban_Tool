@@ -11,7 +11,8 @@ class AddProject extends Component {
             projectIdentifier: "",
             description: "",
             start_date: "",
-            end_date: ""
+            end_date: "",
+            errors: {}
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -21,6 +22,14 @@ class AddProject extends Component {
         this.setState({
             [e.target.name]: e.target.value
         });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            })
+        }
     }
 
     onSubmit(e) {
@@ -37,35 +46,44 @@ class AddProject extends Component {
     }
 
     render() {
+        const { errors } = this.state //ES6 shortcut syntax
+
         return (
-            <div className="project">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-8 m-auto">
-                            <h5 className="display-4 text-center">Create / Edit Project form</h5>
-                            <hr />
-                            <form onSubmit={this.onSubmit}>
-                                <div className="form-group">
-                                    <input type="text" className="form-control form-control-lg " placeholder="Project Name" name="projectName" value={this.state.projectName} onChange={this.onChange} />
-                                </div>
-                                <div className="form-group">
-                                    <input type="text" className="form-control form-control-lg" placeholder="Unique Project ID" name="projectIdentifier" value={this.state.projectIdentifier} onChange={this.onChange} />
-                                </div>
+            <div>
+                <div className="project">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-8 m-auto">
+                                <h5 className="display-4 text-center">Create / Edit Project form</h5>
+                                <hr />
+                                <form onSubmit={this.onSubmit}>
+                                    <div className="form-group">
+                                        <input type="text" className="form-control form-control-lg " placeholder="Project Name" name="projectName" value={this.state.projectName} onChange={this.onChange} />
+                                    </div>
+                                    <p>{errors.projectName}</p>
 
-                                <div className="form-group">
-                                    <textarea className="form-control form-control-lg" placeholder="Project Description" name="description" value={this.state.description} onChange={this.onChange}></textarea>
-                                </div>
-                                <h6>Start Date</h6>
-                                <div className="form-group">
-                                    <input type="date" className="form-control form-control-lg" name="start_date" value={this.state.start_date} onChange={this.onChange} />
-                                </div>
-                                <h6>Estimated End Date</h6>
-                                <div className="form-group">
-                                    <input type="date" className="form-control form-control-lg" name="end_date" value={this.state.end_date} onChange={this.onChange} />
-                                </div>
+                                    <div className="form-group">
+                                        <input type="text" className="form-control form-control-lg" placeholder="Unique Project ID" name="projectIdentifier" value={this.state.projectIdentifier} onChange={this.onChange} />
+                                    </div>
+                                    <p>{errors.projectIdentifier}</p>
 
-                                <input type="submit" className="btn btn-primary btn-block mt-4" />
-                            </form>
+                                    <div className="form-group">
+                                        <textarea className="form-control form-control-lg" placeholder="Project Description" name="description" value={this.state.description} onChange={this.onChange}></textarea>
+                                    </div>
+                                    <p>{errors.description}</p>
+
+                                    <h6>Start Date</h6>
+                                    <div className="form-group">
+                                        <input type="date" className="form-control form-control-lg" name="start_date" value={this.state.start_date} onChange={this.onChange} />
+                                    </div>
+                                    <h6>Estimated End Date</h6>
+                                    <div className="form-group">
+                                        <input type="date" className="form-control form-control-lg" name="end_date" value={this.state.end_date} onChange={this.onChange} />
+                                    </div>
+
+                                    <input type="submit" className="btn btn-primary btn-block mt-4" />
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -75,10 +93,16 @@ class AddProject extends Component {
 }
 
 AddProject.propTypes = {
-    createProject: PropTypes.func.isRequired
+    createProject: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
 };
 
+const mapStateToProps = state => ({
+    errors: state.errors
+})
+
+//send some props to this class
 export default connect(
-    null,
+    mapStateToProps,
     { createProject }
 )(AddProject);
