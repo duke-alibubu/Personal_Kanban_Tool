@@ -6,11 +6,15 @@ export const createProject = (project, history) => async dispatch => {
     try {
         const res = await axios.post("http://localhost:8080/api/project", project);
         history.push("/dashboard");   //after creating the project, directing the user back to the dashboard
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        })
     }
     catch (err) {
         dispatch({
             type: GET_ERRORS,
-            payload: {}
+            payload: err.response.data
         })
     }
 }
