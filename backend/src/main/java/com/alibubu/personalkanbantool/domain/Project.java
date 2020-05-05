@@ -114,4 +114,7 @@ public class Project {
     protected void onUpdate(){
         this.update_At = new Date();
     }
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
+    private Backlog backlog;
 }
