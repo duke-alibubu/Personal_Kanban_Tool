@@ -3,6 +3,8 @@ package com.alibubu.personalkanbantool.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Backlog {
@@ -22,7 +24,17 @@ public class Backlog {
     @JsonIgnore       //ignore this attribute in the JSON response - and avoid infinite reply loop in JSON response!
     private Project project;
 
+    public List<ProjectTask> getProjectTaskList() {
+        return projectTaskList;
+    }
+
+    public void setProjectTaskList(List<ProjectTask> projectTaskList) {
+        this.projectTaskList = projectTaskList;
+    }
+
     //OneToMany association with project task
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "backlog")
+    private List<ProjectTask> projectTaskList = new ArrayList<>();
 
 
     public Long getId() {
