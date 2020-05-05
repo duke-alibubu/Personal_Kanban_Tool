@@ -104,6 +104,14 @@ public class Project {
     public Project() {
     }
 
+    public Backlog getBacklog() {
+        return backlog;
+    }
+
+    public void setBacklog(Backlog backlog) {
+        this.backlog = backlog;
+    }
+
     //done before the object is persisted, i.e saved into db by calling `persist()`
     @PrePersist
     protected void onCreate(){
@@ -116,5 +124,9 @@ public class Project {
     }
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
+    //EAGER fetch type means that data init occurs right when it's init-ed, not when called
+    //CascadeType.ALL means that any changes on the entity here will cascade to the related entity, e.g: deleted -> delete the backlog also
+    //mappedBy specify that the "project" attributes in the Backlog maps to this attrib
+
     private Backlog backlog;
 }

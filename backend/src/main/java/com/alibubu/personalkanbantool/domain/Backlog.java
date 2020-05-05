@@ -1,5 +1,7 @@
 package com.alibubu.personalkanbantool.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,7 +18,8 @@ public class Backlog {
 
     //OneToOne association with project
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="project_id", nullable = false)
+    @JoinColumn(name="project_id", nullable = false)   //link with the project by this attribute project_Id
+    @JsonIgnore       //ignore this attribute in the JSON response - and avoid infinite reply loop in JSON response!
     private Project project;
 
     //OneToMany association with project task
