@@ -11,6 +11,9 @@ public class Backlog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public Backlog() {
+    }
+
     private Integer ptSequence = 0;
     private String projectIdentifier;
     //OneToOne association with project
