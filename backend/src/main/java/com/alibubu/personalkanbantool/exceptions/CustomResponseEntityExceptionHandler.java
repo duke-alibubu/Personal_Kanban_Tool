@@ -18,4 +18,10 @@ public class CustomResponseEntityExceptionHandler {
         ProjectIdExceptionResponse projectIdExceptionResponse = new ProjectIdExceptionResponse(ex.getMessage());
         return new ResponseEntity<>(projectIdExceptionResponse, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleBacklogNotFoundException(BacklogNotFoundException ex, WebRequest request){
+        BacklogNotFoundExceptionResponse backlogNotFoundExceptionResponse = new BacklogNotFoundExceptionResponse(ex.getMessage());
+        return new ResponseEntity<>(backlogNotFoundExceptionResponse, HttpStatus.BAD_REQUEST);
+    }
 }

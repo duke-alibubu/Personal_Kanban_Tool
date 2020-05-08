@@ -2,6 +2,7 @@ package com.alibubu.personalkanbantool.services;
 
 import com.alibubu.personalkanbantool.domain.Backlog;
 import com.alibubu.personalkanbantool.domain.ProjectTask;
+import com.alibubu.personalkanbantool.exceptions.BacklogNotFoundException;
 import com.alibubu.personalkanbantool.repositories.BacklogRepository;
 import com.alibubu.personalkanbantool.repositories.ProjectTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class ProjectTaskService {
     public ProjectTask addProjectTask(String projectIdentifier, ProjectTask projectTask){
         //PTs to be added to a specific non-null project, Backlog exists
         Backlog backlog = backlogRepository.findByProjectIdentifier(projectIdentifier.toUpperCase());
+
+        if (backlog == null)
+            throw new BacklogNotFoundException("Backlog Not Found!");
         //set backlog to the project task
         projectTask.setBacklog(backlog);
 
