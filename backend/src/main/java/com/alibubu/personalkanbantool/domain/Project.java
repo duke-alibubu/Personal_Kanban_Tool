@@ -1,6 +1,7 @@
 package com.alibubu.personalkanbantool.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -127,6 +128,6 @@ public class Project {
     //EAGER fetch type means that data init occurs right when it's init-ed, not when called
     //CascadeType.ALL means that any changes on the entity here will cascade to the related entity, e.g: deleted -> delete the backlog also
     //mappedBy specify that the "project" attributes in the Backlog maps to this attrib
-
+    @JsonIgnore
     private Backlog backlog;
 }
