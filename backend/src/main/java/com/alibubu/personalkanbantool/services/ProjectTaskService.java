@@ -17,7 +17,7 @@ public class ProjectTaskService {
 
     public ProjectTask addProjectTask(String projectIdentifier, ProjectTask projectTask){
         //PTs to be added to a specific non-null project, Backlog exists
-        Backlog backlog = backlogRepository.findByProjectIdentifier(projectIdentifier);
+        Backlog backlog = backlogRepository.findByProjectIdentifier(projectIdentifier.toUpperCase());
         //set backlog to the project task
         projectTask.setBacklog(backlog);
 
@@ -26,17 +26,18 @@ public class ProjectTaskService {
 
         //update the backlog sequence
         backlogSeq++;
+        backlog.setPtSequence(backlogSeq);
 
         //add PtSeq to the task
-        projectTask.setProjectSequence(projectIdentifier + "-" + backlogSeq);
-        projectTask.setProjectIdentifier(projectIdentifier);
+        projectTask.setProjectSequence(projectIdentifier.toUpperCase() + "-" + backlogSeq);
+        projectTask.setProjectIdentifier(projectIdentifier.toUpperCase());
 
         //initial priority when priority is NULL
         if (projectTask.getPriority() == null || projectTask.getPriority() == 0)
             projectTask.setPriority(3);
 
         //initial status when status is NULL
-        if (projectTask.getStatus() == null || projectTask.getStatus() == "")
+        if (projectTask.getStatus() == null || projectTask.getStatus().equals(""))
             projectTask.setStatus("TO_DO");
 
         return projectTaskRepository.save(projectTask);
