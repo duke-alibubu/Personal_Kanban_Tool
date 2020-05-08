@@ -1,17 +1,17 @@
 package com.alibubu.personalkanbantool.exceptions;
 
 public class BacklogNotFoundExceptionResponse {
-    private String projectNotFound;
+    private String backlogNotFound;
 
     public BacklogNotFoundExceptionResponse(String projectNotFound) {
-        this.projectNotFound = projectNotFound;
+        this.backlogNotFound = projectNotFound;
     }
 
     public String getProjectNotFound() {
-        return projectNotFound;
+        return backlogNotFound;
     }
 
     public void setProjectNotFound(String projectNotFound) {
-        this.projectNotFound = projectNotFound;
+        this.backlogNotFound = projectNotFound;
     }
 }

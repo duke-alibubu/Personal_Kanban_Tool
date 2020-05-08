@@ -50,6 +50,12 @@ public class ProjectTaskService {
     }
 
     public Iterable<ProjectTask> findBacklogById(String backlog_id) {
+
+        Backlog backlog = backlogRepository.findByProjectIdentifier(backlog_id.toUpperCase());
+
+        if (backlog == null)
+            throw new BacklogNotFoundException("Backlog Not Found!");
+
         return projectTaskRepository.findByProjectIdentifierOrderByPriority(backlog_id);
     }
 }
