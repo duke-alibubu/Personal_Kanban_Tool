@@ -46,7 +46,8 @@ public class BacklogController {
     }
 
     @PutMapping("/{backlog_id}/{pt_id}")
-    public ResponseEntity<?> updateProjectTask(@Valid @RequestBody ProjectTask updateProjectTask, BindingResult bindingResult, @PathVariable String backlog_id, @PathVariable String pt_id){
+    public ResponseEntity<?> updateProjectTask(@Valid @RequestBody ProjectTask updateProjectTask, BindingResult bindingResult,
+                                               @PathVariable String backlog_id, @PathVariable String pt_id){
         ResponseEntity<?> errorMap = mapValidationErrorService.retrieveErrorMap(bindingResult);
         if (errorMap != null)
             return errorMap;
