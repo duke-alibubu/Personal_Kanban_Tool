@@ -3,6 +3,7 @@ package com.alibubu.personalkanbantool.services;
 import com.alibubu.personalkanbantool.domain.Backlog;
 import com.alibubu.personalkanbantool.domain.ProjectTask;
 import com.alibubu.personalkanbantool.exceptions.BacklogNotFoundException;
+import com.alibubu.personalkanbantool.exceptions.ProjectTaskNotFoundException;
 import com.alibubu.personalkanbantool.repositories.BacklogRepository;
 import com.alibubu.personalkanbantool.repositories.ProjectTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +69,11 @@ public class ProjectTaskService {
 
         ProjectTask projectTask = projectTaskRepository.findByProjectSequence(pt_id);
 
+        if (projectTask == null)
+            throw new ProjectTaskNotFoundException("Project task with sequence " + pt_id + " not found!");
 
+        if (!projectTask.getProjectIdentifier().equals(backlog_id))
+            throw new ProjectTaskNotFoundException("Project task with sequence " + pt_id + " not found in the backlog " + backlog_id + "!");
 
         return projectTask;
     }

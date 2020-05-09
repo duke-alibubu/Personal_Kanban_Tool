@@ -24,4 +24,10 @@ public class CustomResponseEntityExceptionHandler {
         BacklogNotFoundExceptionResponse backlogNotFoundExceptionResponse = new BacklogNotFoundExceptionResponse(ex.getMessage());
         return new ResponseEntity<>(backlogNotFoundExceptionResponse, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler
+    public final ResponseEntity<Object> handleProjectTaskNotFoundException(ProjectTaskNotFoundException ex, WebRequest request){
+        ProjectTaskNotFoundExceptionResponse projectTaskNotFoundExceptionResponse = new ProjectTaskNotFoundExceptionResponse(ex.getMessage());
+        return new ResponseEntity<>(projectTaskNotFoundExceptionResponse, HttpStatus.BAD_REQUEST);
+    }
 }
