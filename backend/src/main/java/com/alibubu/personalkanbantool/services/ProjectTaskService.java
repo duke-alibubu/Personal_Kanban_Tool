@@ -61,7 +61,15 @@ public class ProjectTaskService {
 
     public ProjectTask findProjectTaskByProjectSequence(String backlog_id, String pt_id){
         //make sure we are searching on the right backlog
-        String projSeq = backlog_id + "-" + pt_id;
-        return projectTaskRepository.findByProjectSequence(projSeq);
+        Backlog backlog = backlogRepository.findByProjectIdentifier(backlog_id.toUpperCase());
+
+        if (backlog == null)
+            throw new BacklogNotFoundException("Backlog Not Found!");
+
+        ProjectTask projectTask = projectTaskRepository.findByProjectSequence(pt_id);
+
+
+
+        return projectTask;
     }
 }
