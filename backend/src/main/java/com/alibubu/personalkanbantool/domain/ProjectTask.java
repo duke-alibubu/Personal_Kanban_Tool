@@ -118,7 +118,7 @@ public class ProjectTask {
     }
 
     //manyToOne with Backlog
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH) //refresh so that whenever a project task is refreshed, cascade its changes to the backlog side
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "backlog_id", updatable = false, nullable = false)
     @JsonIgnore
     private Backlog backlog;

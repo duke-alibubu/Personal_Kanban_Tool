@@ -33,7 +33,7 @@ public class Backlog {
     }
 
     //OneToMany association with project task
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "backlog")
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "backlog", orphanRemoval = true) //orphanRemoval so that when this is removed, all "many" side linked to it will be deleted as well
     private List<ProjectTask> projectTaskList = new ArrayList<>();
 
 
